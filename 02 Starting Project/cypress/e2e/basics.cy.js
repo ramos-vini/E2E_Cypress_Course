@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('main page', () => {
+describe('elements management', () => {
   it('has a title', () => {
     cy.visit('http://localhost:5173/');
     cy.get('h1').should('have.length', 1);
