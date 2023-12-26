@@ -29,6 +29,33 @@ describe("tasks management", () => {
         cy.get('.modal button').contains('Add Task').click();
         cy.get('.backdrop').should('not.exist');
         cy.get('dialog.modal').should('not.exist');
+        cy.get('.task h2').contains('New Task');
+        cy.get('.task p').contains('Some Description');
+    });
+
+    it('should validate user input', () => {
+        cy.visit('http://localhost:5173/');
+
+        cy.get('button').contains('Add Task').click();
+        cy.get('.modal button').contains('Add Task').click();
+        cy.get('.modal .error-message');
+    });
+    
+    it('should filter tasks', () => {
+        cy.visit('http://localhost:5173/');
+
+        cy.get('button').contains('Add Task').click();
+        cy.get('#title').type("New Task");
+        cy.get('#summary').type('Some Description');
+        cy.get('#category').select('urgent')
+        cy.get('.modal button').contains('Add Task').click();
+        cy.get('.task').should('have.length', 1);
+
+        cy.get('#filter').select('moderate');
+        cy.get('.task').should('have.length', 0);
+
+        cy.get('#filter').select('urgent');
+        cy.get('.task').should('have.length', 1);
     });
     
 }
