@@ -6,9 +6,9 @@ describe('form submition', () => {
       cy.get('[data-cy="contact-input-message"]').type('I am your father');
       cy.get('[data-cy="contact-input-name"]').type('Darth Vader');
       cy.get('[data-cy="contact-input-email"]').type('darthvader@email.com');
-      cy.get('[data-cy="contact-btn-submit"]').click();
-      cy.get('[data-cy="contact-btn-submit"]').contains('Sending...');
-      cy.get('[data-cy="contact-btn-submit"]').should('have.attr', 'disabled');
-      cy.get('[data-cy="contact-btn-submit"]').should('not.have.attr', 'disabled');
+      cy.get('[data-cy="contact-btn-submit"]').as('submitBtn').click(); // alias
+      cy.get('@submitBtn').contains('Sending...');
+      cy.get('@submitBtn').should('have.attr', 'disabled');
+      cy.get('@submitBtn').should('not.have.attr', 'disabled');
     });
   });
