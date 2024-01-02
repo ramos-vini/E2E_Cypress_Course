@@ -6,7 +6,11 @@ describe('form submition', () => {
       cy.get('[data-cy="contact-input-message"]').type('I am your father');
       cy.get('[data-cy="contact-input-name"]').type('Darth Vader');
       cy.get('[data-cy="contact-input-email"]').type('darthvader@email.com');
-      cy.get('[data-cy="contact-btn-submit"]').as('submitBtn').click(); // alias
+      cy.get('[data-cy="contact-btn-submit"]').as('submitBtn').then((elem) => { // alias + then() function
+        expect(elem.attr('disabled')).to.be.undefined; // cy.get('@submitBtn').should('not.have.attr', 'disabled');
+        expect(elem.text()).to.eq('Send Message');
+      })
+      cy.get('@submitBtn').click(); 
       cy.get('@submitBtn').contains('Sending...');
       cy.get('@submitBtn').should('have.attr', 'disabled');
       cy.get('@submitBtn').should('not.have.attr', 'disabled');
