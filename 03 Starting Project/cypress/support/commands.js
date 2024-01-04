@@ -23,3 +23,7 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('submitForm', () => { // Only recommended for highly repeated and complex commands
+    cy.get('[data-cy="contact-btn-submit"]').click();
+});

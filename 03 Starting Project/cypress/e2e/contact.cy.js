@@ -16,7 +16,7 @@ describe('form submition', () => {
         expect(elem.text()).to.eq('Send Message');
       })
       cy.screenshot(); // before sending the form
-      cy.get('@submitBtn').click(); 
+      cy.submitForm();
       cy.get('@submitBtn').contains('Sending...');
       cy.get('@submitBtn').should('have.attr', 'disabled');
       cy.get('@submitBtn').should('not.have.attr', 'disabled');
