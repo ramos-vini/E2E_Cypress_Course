@@ -15,4 +15,15 @@ describe('form submition', () => {
       cy.get('@submitBtn').should('have.attr', 'disabled');
       cy.get('@submitBtn').should('not.have.attr', 'disabled');
     });
+
+    it('should submit the form when pressing enter', () => {
+      cy.visit('http://localhost:5173/about');
+      cy.get('[data-cy="contact-input-message"]').type('I am your father');
+      cy.get('[data-cy="contact-input-name"]').type('Darth Vader');
+      cy.get('[data-cy="contact-input-email"]').type('darthvader@email.com{enter}');
+      cy.get('[data-cy="contact-btn-submit"]').as('submitBtn').then((elem) => {
+        expect(elem.text()).to.eq('Sending...');
+        expect(elem.attr('disabled')).to.exist;
+      });
+    });
   });
