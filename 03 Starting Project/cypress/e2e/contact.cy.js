@@ -10,10 +10,12 @@ describe('form submition', () => {
         expect(elem.attr('disabled')).to.be.undefined; // cy.get('@submitBtn').should('not.have.attr', 'disabled');
         expect(elem.text()).to.eq('Send Message');
       })
+      cy.screenshot(); // before sending the form
       cy.get('@submitBtn').click(); 
       cy.get('@submitBtn').contains('Sending...');
       cy.get('@submitBtn').should('have.attr', 'disabled');
       cy.get('@submitBtn').should('not.have.attr', 'disabled');
+      cy.screenshot(); // after sending the form
     });
 
     it('should submit the form by pressing enter', () => {
