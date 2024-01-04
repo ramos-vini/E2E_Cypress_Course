@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 describe('form submition', () => {
-    it('should submit the form', () => {
+    it('should submit the form by pressing the submit button', () => {
       cy.visit('http://localhost:5173/about');
       cy.get('[data-cy="contact-input-message"]').type('I am your father');
       cy.get('[data-cy="contact-input-name"]').type('Darth Vader');
@@ -16,7 +16,7 @@ describe('form submition', () => {
       cy.get('@submitBtn').should('not.have.attr', 'disabled');
     });
 
-    it('should submit the form when pressing enter', () => {
+    it('should submit the form by pressing enter', () => {
       cy.visit('http://localhost:5173/about');
       cy.get('[data-cy="contact-input-message"]').type('I am your father');
       cy.get('[data-cy="contact-input-name"]').type('Darth Vader');
@@ -24,6 +24,15 @@ describe('form submition', () => {
       cy.get('[data-cy="contact-btn-submit"]').as('submitBtn').then((elem) => {
         expect(elem.text()).to.eq('Sending...');
         expect(elem.attr('disabled')).to.exist;
+      });
+    });
+
+    it('should validate the form format', () => {
+      cy.visit('http://localhost:5173/about');
+      cy.get('[data-cy="contact-btn-submit"]').as('submitBtn').click();
+      cy.get('@submitBtn').then((el) => {
+        expect(el.attr('disabled')).to.not.exist;
+        expect(el.text()).to.not.equal('Sending...');
       });
     });
   });
