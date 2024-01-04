@@ -3,11 +3,13 @@
 describe('form submition', () => {
 
     beforeEach(() => {
+      cy.task('seedDatabase', 'filename.csv'); // calling via browser a function that will be executed in the server
+
       cy.visit('/about'); // '{baseUrl}/about' = 'http://localhost:5173/about'
     });
     // Also: before(), afterEach(), after(). Last two not recommended
 
-    it('should submit the form by pressing the submit button', () => {
+    it('should submit the form by pressing the submit button', () => {      
       cy.getById('contact-input-message').type('I am your father'); // Custom Query
       cy.getById('contact-input-name').type('Darth Vader');
       cy.getById('contact-input-email').type('darthvader@email.com');
