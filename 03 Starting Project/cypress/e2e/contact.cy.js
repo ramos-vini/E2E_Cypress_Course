@@ -8,15 +8,15 @@ describe('form submition', () => {
     // Also: before(), afterEach(), after(). Last two not recommended
 
     it('should submit the form by pressing the submit button', () => {
-      cy.get('[data-cy="contact-input-message"]').type('I am your father');
-      cy.get('[data-cy="contact-input-name"]').type('Darth Vader');
-      cy.get('[data-cy="contact-input-email"]').type('darthvader@email.com');
-      cy.get('[data-cy="contact-btn-submit"]').as('submitBtn').then((elem) => { // alias + then() function
+      cy.getById('contact-input-message').type('I am your father'); // Custom Query
+      cy.getById('contact-input-name').type('Darth Vader');
+      cy.getById('contact-input-email').type('darthvader@email.com');
+      cy.getById('contact-btn-submit').as('submitBtn').then((elem) => { // alias + then() function
         expect(elem.attr('disabled')).to.be.undefined; // cy.get('@submitBtn').should('not.have.attr', 'disabled');
         expect(elem.text()).to.eq('Send Message');
       })
       cy.screenshot(); // before sending the form
-      cy.submitForm();
+      cy.submitForm(); // Custom Command
       cy.get('@submitBtn').contains('Sending...');
       cy.get('@submitBtn').should('have.attr', 'disabled');
       cy.get('@submitBtn').should('not.have.attr', 'disabled');

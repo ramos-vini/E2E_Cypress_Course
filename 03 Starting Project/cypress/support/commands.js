@@ -24,6 +24,18 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+// Custom Command
 Cypress.Commands.add('submitForm', () => { // Only recommended for highly repeated and complex commands
     cy.get('[data-cy="contact-btn-submit"]').click();
 });
+
+// Custom Query
+Cypress.Commands.addQuery('getById', (id) => {
+
+    // ready to execute function
+    const getFn = cy.now('get', `[data-cy="${id}"]`); // cy.get('[data-cy="contact-input-message"]')
+
+    return () => { // functions returned here work with the Timeframe model
+        return getFn();
+    }
+})
