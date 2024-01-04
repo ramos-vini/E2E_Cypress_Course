@@ -49,7 +49,9 @@ describe('form submition', () => {
       .and('match', /invalid/);
 
       cy.get('[data-cy="contact-input-email"]').focus().blur().parent()
-      .should('have.attr', 'class')
-      .and('match', /invalid/);
+      .should((el) => { // acts pretty similar to then()
+        expect(el.attr('class')).to.exist;
+        expect(el.attr('class')).to.contain('invalid');
+      })
     });
   });
