@@ -29,10 +29,25 @@ describe('form submition', () => {
 
     it('should validate the form format', () => {
       cy.visit('http://localhost:5173/about');
+
+      // Blank inputs
       cy.get('[data-cy="contact-btn-submit"]').as('submitBtn').click();
       cy.get('@submitBtn').then((el) => {
         expect(el.attr('disabled')).to.not.exist;
         expect(el.text()).to.not.equal('Sending...');
+      });
+
+      // CSS invalid wrapper classes
+      cy.get('[data-cy="contact-input-message"]').focus().blur().parent().then((el) => {
+        expect(el.attr('class')).to.contain('invalid');
+      });
+
+      cy.get('[data-cy="contact-input-name"]').focus().blur().parent().then((el) => {
+        expect(el.attr('class')).to.contain('invalid');
+      });
+
+      cy.get('[data-cy="contact-input-email"]').focus().blur().parent().then((el) => {
+        expect(el.attr('class')).to.contain('invalid');
       });
     });
   });
