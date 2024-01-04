@@ -38,16 +38,16 @@ describe('form submition', () => {
       });
 
       // CSS invalid wrapper classes
-      cy.get('[data-cy="contact-input-message"]').focus().blur().parent().then((el) => {
-        expect(el.attr('class')).to.contain('invalid');
-      });
+      cy.get('[data-cy="contact-input-message"]').focus().blur().parent() // then() sometimes doesn't work for cypress run
+      .should('have.attr', 'class') // returns the attr itself
+      .and('match', /invalid/); // 'match' assertion allows regexps
 
-      cy.get('[data-cy="contact-input-name"]').focus().blur().parent().then((el) => {
-        expect(el.attr('class')).to.contain('invalid');
-      });
+      cy.get('[data-cy="contact-input-name"]').focus().blur().parent()
+      .should('have.attr', 'class')
+      .and('match', /invalid/);
 
-      cy.get('[data-cy="contact-input-email"]').focus().blur().parent().then((el) => {
-        expect(el.attr('class')).to.contain('invalid');
-      });
+      cy.get('[data-cy="contact-input-email"]').focus().blur().parent()
+      .should('have.attr', 'class')
+      .and('match', /invalid/);
     });
   });
