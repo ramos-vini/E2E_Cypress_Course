@@ -2,7 +2,7 @@
 
 describe('form submition', () => {
     it('should submit the form by pressing the submit button', () => {
-      cy.visit('http://localhost:5173/about');
+      cy.visit('/about'); // '{baseUrl}/about' = 'http://localhost:5173/about'
       cy.get('[data-cy="contact-input-message"]').type('I am your father');
       cy.get('[data-cy="contact-input-name"]').type('Darth Vader');
       cy.get('[data-cy="contact-input-email"]').type('darthvader@email.com');
@@ -19,7 +19,7 @@ describe('form submition', () => {
     });
 
     it('should submit the form by pressing enter', () => {
-      cy.visit('http://localhost:5173/about');
+      cy.visit('/about');
       cy.get('[data-cy="contact-input-message"]').type('I am your father');
       cy.get('[data-cy="contact-input-name"]').type('Darth Vader');
       cy.get('[data-cy="contact-input-email"]').type('darthvader@email.com{enter}');
@@ -30,7 +30,7 @@ describe('form submition', () => {
     });
 
     it('should validate the form format', () => {
-      cy.visit('http://localhost:5173/about');
+      cy.visit('/about');
 
       // Blank inputs
       cy.get('[data-cy="contact-btn-submit"]').as('submitBtn').click();
