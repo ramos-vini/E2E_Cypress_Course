@@ -1,5 +1,4 @@
 import { defineConfig } from 'cypress';
-
 import { seed } from './prisma/seed-test';
 
 export default defineConfig({
@@ -12,7 +11,7 @@ export default defineConfig({
           await seed();
           return null;
         }
-      })
+      });
     },
   },
 });

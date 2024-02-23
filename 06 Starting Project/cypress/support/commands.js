@@ -12,6 +12,15 @@
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('login', () => {
+  cy.visit('/login');
+  cy.get('[data-cy="auth-email"]').click();
+  cy.get('[data-cy="auth-email"]').type('test@example.com');
+  cy.get('[data-cy="auth-password"]').type('testpassword');
+  cy.get('[data-cy="auth-submit"]').click();
+  cy.location('pathname').should('eq', '/takeaways');
+  cy.getCookie('__session').its('value').should('not.be.empty');
+ });
 //
 //
 // -- This is a child command --
